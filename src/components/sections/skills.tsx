@@ -5,8 +5,8 @@ import { motion } from 'framer-motion';
 import { 
   SiReact, SiNextdotjs, SiTypescript, SiTailwindcss,
   SiNodedotjs, SiExpress, SiPostgresql, SiMongodb,
-  SiGit, SiDocker, SiFigma, SiAmazon,
-  SiJavascript, SiPython, SiPrisma, SiGraphql
+  SiGit, SiFigma, SiJavascript, SiPrisma, SiGraphql,
+  SiSanity, SiOpenai
 } from 'react-icons/si';
 
 const SkillsSection = () => {
@@ -15,40 +15,41 @@ const SkillsSection = () => {
       title: 'Frontend',
       color: 'from-blue-400 to-cyan-400',
       skills: [
-        { name: 'React', icon: SiReact, level: 95 },
-        { name: 'Next.js', icon: SiNextdotjs, level: 90 },
-        { name: 'TypeScript', icon: SiTypescript, level: 85 },
-        { name: 'Tailwind CSS', icon: SiTailwindcss, level: 92 }
+        { name: 'React', icon: SiReact },
+        { name: 'Next.js', icon: SiNextdotjs },
+        { name: 'TypeScript', icon: SiTypescript },
+        { name: 'Tailwind CSS', icon: SiTailwindcss }
       ]
     },
     {
       title: 'Backend',
       color: 'from-green-400 to-emerald-400',
       skills: [
-        { name: 'Node.js', icon: SiNodedotjs, level: 88 },
-        { name: 'Express', icon: SiExpress, level: 85 },
-        { name: 'Python', icon: SiPython, level: 75 },
-        { name: 'GraphQL', icon: SiGraphql, level: 70 }
+        { name: 'Node.js', icon: SiNodedotjs },
+        { name: 'Express', icon: SiExpress },
+        { name: 'REST APIs', icon: null },
+        { name: 'GraphQL', icon: SiGraphql }
       ]
     },
     {
-      title: 'Database',
+      title: 'Database & CMS',
       color: 'from-purple-400 to-pink-400',
       skills: [
-        { name: 'PostgreSQL', icon: SiPostgresql, level: 80 },
-        { name: 'MongoDB', icon: SiMongodb, level: 85 },
-        { name: 'Prisma ORM', icon: SiPrisma, level: 78 },
-        { name: 'SQL', icon: null, level: 82 }
+        { name: 'PostgreSQL', icon: SiPostgresql },
+        { name: 'MongoDB', icon: SiMongodb },
+        { name: 'Prisma ORM', icon: SiPrisma },
+        { name: 'Sanity.io', icon: SiSanity }
       ]
     },
     {
       title: 'Tools & Others',
       color: 'from-orange-400 to-red-400',
       skills: [
-        { name: 'Git', icon: SiGit, level: 90 },
-        { name: 'Docker', icon: SiDocker, level: 75 },
-        { name: 'AWS', icon: SiAmazon, level: 70 },
-        { name: 'Figma', icon: SiFigma, level: 85 }
+        { name: 'Git', icon: SiGit },
+        { name: 'Figma', icon: SiFigma },
+        { name: 'SEO', icon: null },
+        { name: 'JavaScript', icon: SiJavascript },
+        { name: 'AI Integration', icon: SiOpenai }
       ]
     }
   ];
@@ -139,26 +140,14 @@ const SkillsSection = () => {
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-2">
                           {Icon ? (
-                            <Icon className="text-gray-400 group-hover:text-yellow-400 transition-colors" size={16} />
+                            <Icon className="text-gray-400 group-hover:text-yellow-400 transition-colors" size={18} />
                           ) : (
-                            <div className="w-4 h-4 bg-gray-600 rounded" />
+                            <div className="w-4 h-4 bg-gradient-to-br from-gray-600 to-gray-700 rounded" />
                           )}
-                          <span className="text-sm text-gray-300 group-hover:text-white transition-colors">
+                          <span className="text-sm text-gray-300 group-hover:text-white transition-colors font-medium">
                             {skill.name}
                           </span>
                         </div>
-                        <span className="text-xs text-gray-500">{skill.level}%</span>
-                      </div>
-                      
-                      {/* Progress Bar */}
-                      <div className="w-full h-1.5 bg-gray-800 rounded-full overflow-hidden">
-                        <motion.div
-                          className={`h-full bg-gradient-to-r ${category.color}`}
-                          initial={{ width: 0 }}
-                          whileInView={{ width: `${skill.level}%` }}
-                          transition={{ duration: 1, delay: 0.2 + (i * 0.1) }}
-                          viewport={{ once: true }}
-                        />
                       </div>
                     </motion.div>
                   );
@@ -178,7 +167,7 @@ const SkillsSection = () => {
         >
           <p className="text-gray-400 mb-4">Also familiar with:</p>
           <div className="flex flex-wrap justify-center gap-3">
-            {['Redux', 'Jest', 'Webpack', 'CI/CD', 'Agile', 'REST APIs', 'WebSockets', 'SEO'].map((skill, i) => (
+            {['Redux', 'Framer Motion', 'Responsive Design', 'Agile', 'WebSockets', 'Authentication', 'Git Workflow', 'UI/UX Design'].map((skill, i) => (
               <motion.span
                 key={skill}
                 className="px-4 py-2 bg-white/5 backdrop-blur-sm border border-gray-700 rounded-full text-sm text-gray-400 hover:border-yellow-400/50 hover:text-yellow-400 transition-all duration-300"

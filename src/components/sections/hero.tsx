@@ -1,4 +1,3 @@
-// components/sections/HeroSection.tsx
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -124,9 +123,9 @@ const HeroSection = () => {
             transition={{ delay: 0.8 }}
           >
             {[
-              { label: 'Years Experience', value: '5+' },
-              { label: 'Projects Completed', value: '50+' },
-              { label: 'Happy Clients', value: '30+' }
+              { label: 'Tech Stack', value: '15+' },
+              { label: 'Production Sites', value: '2' },
+              { label: 'Satisfied Clients', value: '100%' }
             ].map((stat, i) => (
               <motion.div
                 key={stat.label}
@@ -190,7 +189,7 @@ const HeroSection = () => {
             
             <div className="relative w-full h-full rounded-full bg-gradient-to-br from-yellow-400/20 to-orange-500/20 backdrop-blur-sm border border-yellow-400/30 flex items-center justify-center">
               {/* You can replace this with an actual image */}
-              <div className="text-6xl font-bold text-yellow-400">MR</div>
+              <div className="text-6xl font-bold text-yellow-400"></div>
             </div>
           </div>
         </motion.div>

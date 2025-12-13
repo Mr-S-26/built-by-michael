@@ -1,8 +1,8 @@
-
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 interface LoadingScreenProps {
   onDone?: () => void;
@@ -31,7 +31,7 @@ const LoadingScreen = ({ onDone, delayMs = 2500 }: LoadingScreenProps) => {
             layoutId="brand"
           >
             <motion.div
-              className="w-32 h-32 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center"
+              className="w-32 h-32 rounded-full bg-white flex items-center justify-center p-4"
               animate={{
                 boxShadow: [
                   "0 0 30px rgba(255,211,0,0.5)",
@@ -41,7 +41,13 @@ const LoadingScreen = ({ onDone, delayMs = 2500 }: LoadingScreenProps) => {
               }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              <span className="text-4xl font-bold text-black">MR</span>
+              <Image 
+                src="/logo.png" 
+                alt="Michael Ryan Logo" 
+                width={80} 
+                height={80}
+                className="object-contain rounded-full"
+              />
             </motion.div>
             <motion.h1
               className="mt-6 text-2xl font-bold text-yellow-400"

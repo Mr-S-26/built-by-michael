@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from 'react';
@@ -27,83 +26,23 @@ const PortfolioSection = () => {
   const projects: Project[] = [
     {
       id: 1,
-      title: 'E-Commerce Platform',
+      title: 'OOTB (Out of the Box)',
       category: 'Full-Stack',
-      description: 'A modern e-commerce platform with real-time inventory, payment processing, and admin dashboard.',
-      image: '🛍️',
-      tags: ['Next.js', 'Node.js', 'PostgreSQL', 'Stripe'],
-      githubUrl: '#',
-      liveUrl: '#',
+      description: 'I developed a visually stunning portfolio for a premier creative agency. The goal was to showcase high-res media without sacrificing load speed.',
+      image: '/ootb.png',
+      tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Nodemailer'],
+      liveUrl: 'https://ootbcreatives.asia/',
       featured: true
     },
     {
       id: 2,
-      title: 'Task Management App',
-      category: 'Frontend',
-      description: 'Collaborative task management application with drag-and-drop functionality and real-time updates.',
-      image: '✅',
-      tags: ['React', 'TypeScript', 'Tailwind', 'Firebase'],
-      githubUrl: '#',
-      liveUrl: '#'
-    },
-    {
-      id: 3,
-      title: 'Real-time Chat App',
+      title: 'PUDCI Platform',
       category: 'Full-Stack',
-      description: 'Secure messaging platform with end-to-end encryption and video calling features.',
-      image: '💬',
-      tags: ['Socket.io', 'Express', 'MongoDB', 'WebRTC'],
-      githubUrl: '#',
-      liveUrl: '#',
+      description: 'I built a modern digital platform for a leading diagnostic center to digitize patient engagement.',
+      image: '/pudci.png', // Updated to use a real image path
+      tags: ['React', 'TypeScript', 'Tailwind CSS', 'Next.js', 'Sanity CMS'],
+      liveUrl: 'https://www.pudci.ph/',
       featured: true
-    },
-    {
-      id: 4,
-      title: 'Portfolio Website',
-      category: 'Frontend',
-      description: 'Modern portfolio website with smooth animations and responsive design.',
-      image: '🎨',
-      tags: ['Next.js', 'Framer Motion', 'Tailwind CSS'],
-      githubUrl: '#',
-      liveUrl: '#'
-    },
-    {
-      id: 5,
-      title: 'Weather Dashboard',
-      category: 'Frontend',
-      description: 'Beautiful weather dashboard with location-based forecasts and interactive maps.',
-      image: '🌤️',
-      tags: ['React', 'Weather API', 'Chart.js', 'Mapbox'],
-      githubUrl: '#',
-      liveUrl: '#'
-    },
-    {
-      id: 6,
-      title: 'Blog Platform',
-      category: 'Full-Stack',
-      description: 'Full-featured blog platform with markdown support, comments, and SEO optimization.',
-      image: '📝',
-      tags: ['Next.js', 'MDX', 'Prisma', 'PostgreSQL'],
-      githubUrl: '#',
-      liveUrl: '#'
-    },
-    {
-      id: 7,
-      title: 'API Gateway',
-      category: 'Backend',
-      description: 'Scalable API gateway with rate limiting, authentication, and monitoring.',
-      image: '🔧',
-      tags: ['Node.js', 'Redis', 'Docker', 'Kubernetes'],
-      githubUrl: '#'
-    },
-    {
-      id: 8,
-      title: 'Mobile Banking App',
-      category: 'Mobile',
-      description: 'Secure mobile banking application with biometric authentication.',
-      image: '📱',
-      tags: ['React Native', 'TypeScript', 'Node.js'],
-      liveUrl: '#'
     }
   ];
 
@@ -135,7 +74,7 @@ const PortfolioSection = () => {
             My <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500">Portfolio</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
-            A selection of projects that showcase my skills and passion for web development
+            Production-ready applications built with modern technologies and best practices
           </p>
         </motion.div>
         
@@ -195,16 +134,22 @@ const PortfolioSection = () => {
                 )}
                 
                 {/* Project Image */}
-                <div className="relative aspect-video bg-gradient-to-br from-yellow-400/10 to-orange-500/10 flex items-center justify-center text-6xl overflow-hidden">
-                  {/* Placeholder emoji - replace with actual image */}
+                <div className="relative aspect-video bg-gray-900 flex items-center justify-center overflow-hidden">
                   <motion.div
+                    className="relative w-full h-full"
                     animate={{
                       scale: hoveredProject === project.id ? 1.1 : 1,
-                      rotate: hoveredProject === project.id ? 5 : 0
+                      rotate: hoveredProject === project.id ? 2 : 0
                     }}
                     transition={{ duration: 0.3 }}
                   >
-                    {project.image}
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
                   </motion.div>
                   
                   {/* Hover Overlay */}

@@ -4,6 +4,7 @@
 import { useState, useEffect } from 'react';
 import { motion, useScroll } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface NavbarProps {
   showBrand?: boolean;
@@ -55,8 +56,14 @@ const Navbar = ({ showBrand = true }: NavbarProps) => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center shadow-lg group-hover:shadow-yellow-400/50 transition-shadow">
-                  <span className="text-lg font-bold text-black">MR</span>
+                <div className="w-10 h-10 rounded-full flex items-center justify-center shadow-lg group-hover:shadow-yellow-400/50 transition-shadow p-1.5">
+                  <Image 
+                    src="/logo.png" 
+                    alt="Michael Ryan Logo" 
+                    width={80} 
+                    height={80}
+                    className="object-contain rounded-full"
+                  />
                 </div>
                 <span className="text-xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
                   Michael Ryan

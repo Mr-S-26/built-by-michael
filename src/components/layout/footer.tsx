@@ -1,8 +1,8 @@
-
 "use client";
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaHeart, FaArrowUp } from 'react-icons/fa';
 
 const Footer = () => {
@@ -57,8 +57,14 @@ const Footer = () => {
             viewport={{ once: true }}
           >
             <Link href="/" className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center">
-                <span className="text-lg font-bold text-black">MR</span>
+              <div className="w-10 h-10 rounded-full flex items-center justify-center p-1.5">
+                <Image 
+                  src="/logo.png" 
+                  alt="Michael Ryan Logo" 
+                  width={40} 
+                  height={40}
+                  className="object-contain rounded-full"
+                />
               </div>
               <span className="text-xl font-bold text-yellow-400">Michael Ryan</span>
             </Link>

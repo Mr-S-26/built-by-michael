@@ -35,15 +35,14 @@ const ContactSection = () => {
   };
 
   const contactInfo = [
-    { icon: FaEnvelope, label: 'Email', value: 'michael@example.com', href: 'mailto:michael@example.com' },
-    { icon: FaPhone, label: 'Phone', value: '+1 (555) 123-4567', href: 'tel:+15551234567' },
-    { icon: FaMapMarkerAlt, label: 'Location', value: 'San Francisco, CA', href: '#' }
+    { icon: FaEnvelope, label: 'Email', value: 'michaelryansia.dev@gmail.com', href: '#' },
+    { icon: FaPhone, label: 'Phone', value: '+639 9170 208', href: '#' },
+    { icon: FaMapMarkerAlt, label: 'Location', value: 'Metro Manila, Malabon Philippines', href: '#' }
   ];
 
   const socialLinks = [
-    { icon: FaLinkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-    { icon: FaGithub, href: 'https://github.com', label: 'GitHub' },
-    { icon: FaTwitter, href: 'https://twitter.com', label: 'Twitter' }
+    { icon: FaLinkedin, href: 'https://www.linkedin.com/in/michael-ryan-sia-a1a75028b/', label: 'LinkedIn' },
+    { icon: FaGithub, href: 'https://github.com/Mr-S-26', label: 'GitHub' },
   ];
 
   return (

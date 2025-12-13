@@ -1,10 +1,9 @@
-
 "use client";
 
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
-import { FaGithub, FaLinkedin, FaTwitter, FaInstagram } from 'react-icons/fa';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 const AboutSection = () => {
   const containerRef = useRef<HTMLElement>(null);
@@ -17,17 +16,8 @@ const AboutSection = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
 
   const socialLinks = [
-    { icon: FaGithub, href: 'https://github.com', label: 'GitHub' },
-    { icon: FaLinkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-    { icon: FaTwitter, href: 'https://twitter.com', label: 'Twitter' },
-    { icon: FaInstagram, href: 'https://instagram.com', label: 'Instagram' }
-  ];
-
-  const stats = [
-    { label: 'Projects', value: '50+' },
-    { label: 'Experience', value: '5+ Years' },
-    { label: 'Clients', value: '30+' },
-    { label: 'Awards', value: '10+' }
+    { icon: FaGithub, href: 'https://github.com/Mr-S-26', label: 'GitHub' },
+    { icon: FaLinkedin, href: 'https://www.linkedin.com/in/michael-ryan-sia-a1a75028b/', label: 'LinkedIn' },
   ];
 
   return (
@@ -68,14 +58,13 @@ const AboutSection = () => {
               <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900">
                 <span className="text-8xl font-bold text-yellow-400">MR</span>
               </div>
-              {/* Uncomment and use this for actual image */}
-              {/* <Image
+              {<Image
                 src="/profile.jpg"
                 alt="Michael Ryan"
                 fill
                 className="object-cover"
                 priority
-              /> */}
+              /> }
             </div>
 
             {/* Floating elements */}
@@ -159,43 +148,18 @@ const AboutSection = () => {
           </h2>
           
           <p className="text-gray-300 mb-6 leading-relaxed">
-            I&apos;m a passionate Full-Stack Developer with a keen eye for design and a love for creating
-            seamless user experiences. With expertise in modern web technologies, I specialize in
-            building scalable, performant applications that not only look great but also deliver
-            exceptional functionality.
+            I&apos;m a Full-Stack Developer with a Bachelor&apos;s degree in Information Technology, 
+            specializing in programming. After gaining valuable professional experience in government 
+            service, I pursued my passion for web development and have successfully delivered production-ready 
+            applications for satisfied clients.
           </p>
           
           <p className="text-gray-300 mb-8 leading-relaxed">
-            My journey in web development has equipped me with a diverse skill set, from crafting
-            pixel-perfect interfaces to architecting robust backend systems. I believe in writing
-            clean, maintainable code and staying up-to-date with the latest industry trends.
+            My journey combines formal IT education with hands-on development experience. I specialize 
+            in building modern, scalable web applications using cutting-edge technologies. From complex 
+            backend systems to polished user interfaces, I bring dedication, attention to detail, and 
+            problem-solving skills to every project.
           </p>
-          
-          {/* Stats Grid */}
-          <div className="grid grid-cols-2 gap-4 mb-8">
-            {stats.map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-yellow-400/20 hover:border-yellow-400/40 transition-all duration-300"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.05 }}
-              >
-                <motion.div 
-                  className="text-2xl font-bold text-yellow-400"
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  transition={{ delay: 0.3 + (i * 0.1), type: "spring" }}
-                  viewport={{ once: true }}
-                >
-                  {stat.value}
-                </motion.div>
-                <div className="text-sm text-gray-400">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
 
           {/* CTA Button */}
           <motion.div
