@@ -212,7 +212,7 @@ const HeroSection = () => {
             ))}
             
             {/* Center "Tech Hologram" Container */}
-            <div className="relative w-full h-full rounded-full bg-gradient-to-br from-yellow-400/10 to-orange-500/10 backdrop-blur-sm border border-yellow-400/30 flex items-center justify-center">
+            <div className="relative w-full h-full rounded-full  flex items-center justify-center">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={iconIndex}
