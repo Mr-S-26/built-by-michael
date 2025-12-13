@@ -2,17 +2,41 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { SiReact, SiNextdotjs, SiTypescript, SiNodedotjs, } from 'react-icons/si';
+
+// Moved outside component to fix dependency warning
+const titles = ['Full-Stack Developer', 'UI/UX Enthusiast', 'Problem Solver'];
+
+// Icons to cycle through in the hologram
+const techIcons = [
+  { Component: SiReact, color: '#61DAFB' },
+  { Component: SiNextdotjs, color: '#FFFFFF' },
+  { Component: SiTypescript, color: '#3178C6' },
+  { Component: SiNodedotjs, color: '#339933' },
+];
 
 const HeroSection = () => {
   const [titleIndex, setTitleIndex] = useState(0);
-  const titles = ['Full-Stack Developer', 'UI/UX Enthusiast', 'Problem Solver'];
+  const [iconIndex, setIconIndex] = useState(0);
   
   useEffect(() => {
-    const interval = setInterval(() => {
+    // Cycle titles
+    const titleInterval = setInterval(() => {
       setTitleIndex((prev) => (prev + 1) % titles.length);
     }, 3000);
-    return () => clearInterval(interval);
+
+    // Cycle icons (faster than titles for dynamic feel)
+    const iconInterval = setInterval(() => {
+      setIconIndex((prev) => (prev + 1) % techIcons.length);
+    }, 2000);
+
+    return () => {
+      clearInterval(titleInterval);
+      clearInterval(iconInterval);
+    };
   }, []);
+
+  const CurrentIcon = techIcons[iconIndex].Component;
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center px-6 pt-20">
@@ -147,8 +171,9 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <div className="relative w-full aspect-square max-w-lg mx-auto">
+            {/* Background Glow */}
             <motion.div
-              className="absolute inset-0 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full blur-3xl opacity-30"
+              className="absolute inset-0 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full blur-3xl opacity-20"
               animate={{
                 scale: [1, 1.2, 1],
                 rotate: [0, 180, 360],
@@ -160,7 +185,7 @@ const HeroSection = () => {
               }}
             />
             
-            {/* Orbiting elements */}
+            {/* Orbiting Elements */}
             {[...Array(3)].map((_, i) => (
               <motion.div
                 key={i}
@@ -175,20 +200,35 @@ const HeroSection = () => {
                 }}
               >
                 <div 
-                  className="absolute w-4 h-4 bg-yellow-400 rounded-full"
+                  className="absolute w-3 h-3 bg-yellow-400 rounded-full"
                   style={{
                     top: '10%',
                     left: '50%',
                     transform: 'translateX(-50%)',
-                    boxShadow: '0 0 20px rgba(255,211,0,0.8)'
+                    boxShadow: '0 0 15px rgba(255,211,0,0.8)'
                   }}
                 />
               </motion.div>
             ))}
             
-            <div className="relative w-full h-full rounded-full bg-gradient-to-br from-yellow-400/20 to-orange-500/20 backdrop-blur-sm border border-yellow-400/30 flex items-center justify-center">
-              {/* You can replace this with an actual image */}
-              <div className="text-6xl font-bold text-yellow-400"></div>
+            {/* Center "Tech Hologram" Container */}
+            <div className="relative w-full h-full rounded-full bg-gradient-to-br from-yellow-400/10 to-orange-500/10 backdrop-blur-sm border border-yellow-400/30 flex items-center justify-center">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={iconIndex}
+                  initial={{ opacity: 0, scale: 0.5, rotateY: 90 }}
+                  animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+                  exit={{ opacity: 0, scale: 0.5, rotateY: -90 }}
+                  transition={{ duration: 0.5 }}
+                  className="relative z-10"
+                >
+                  <CurrentIcon 
+                    size={200} 
+                    color={techIcons[iconIndex].color}
+                    className="drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+                  />
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
         </motion.div>
