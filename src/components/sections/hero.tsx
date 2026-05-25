@@ -1,254 +1,194 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { SiReact, SiNextdotjs, SiTypescript, SiNodedotjs, } from 'react-icons/si';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import {
+  SiReact, SiNextdotjs, SiTypescript, SiNodedotjs,
+  SiTailwindcss, SiFirebase, SiWordpress, SiExpo,
+  SiPrisma, SiRedux, SiMysql, SiSanity
+} from 'react-icons/si';
 
-// Moved outside component to fix dependency warning
 const titles = ['Full-Stack Developer', 'UI/UX Enthusiast', 'Problem Solver'];
 
-// Icons to cycle through in the hologram
-const techIcons = [
-  { Component: SiReact, color: '#61DAFB' },
-  { Component: SiNextdotjs, color: '#FFFFFF' },
-  { Component: SiTypescript, color: '#3178C6' },
-  { Component: SiNodedotjs, color: '#339933' },
+const marqueeIcons = [
+  { Component: SiReact, color: '#61DAFB', label: 'React' },
+  { Component: SiNextdotjs, color: '#FFFFFF', label: 'Next.js' },
+  { Component: SiTypescript, color: '#3178C6', label: 'TypeScript' },
+  { Component: SiNodedotjs, color: '#339933', label: 'Node.js' },
+  { Component: SiTailwindcss, color: '#06B6D4', label: 'Tailwind' },
+  { Component: SiFirebase, color: '#FFCA28', label: 'Firebase' },
+  { Component: SiWordpress, color: '#21759B', label: 'WordPress' },
+  { Component: SiExpo, color: '#FFFFFF', label: 'Expo' },
+  { Component: SiPrisma, color: '#2D3748', label: 'Prisma' },
+  { Component: SiRedux, color: '#764ABC', label: 'Redux' },
+  { Component: SiMysql, color: '#4479A1', label: 'MySQL' },
+  { Component: SiSanity, color: '#F03E2F', label: 'Sanity' },
 ];
 
 const HeroSection = () => {
-  const [titleIndex, setTitleIndex] = useState(0);
-  const [iconIndex, setIconIndex] = useState(0);
-  
-  useEffect(() => {
-    // Cycle titles
-    const titleInterval = setInterval(() => {
-      setTitleIndex((prev) => (prev + 1) % titles.length);
-    }, 3000);
+  const heroRef = useRef<HTMLElement>(null);
 
-    // Cycle icons (faster than titles for dynamic feel)
-    const iconInterval = setInterval(() => {
-      setIconIndex((prev) => (prev + 1) % techIcons.length);
-    }, 2000);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"]
+  });
 
-    return () => {
-      clearInterval(titleInterval);
-      clearInterval(iconInterval);
-    };
-  }, []);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const heroScale = useTransform(scrollYProgress, [0, 0.8], [1, 0.85]);
 
-  const CurrentIcon = techIcons[iconIndex].Component;
+  // Duplicate icons for seamless marquee
+  const doubleIcons = [...marqueeIcons, ...marqueeIcons];
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center px-6 pt-20">
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+    <section
+      id="home"
+      ref={heroRef}
+      className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden"
+    >
+      <motion.div
+        className="flex flex-col items-center text-center"
+        style={{ opacity: heroOpacity, scale: heroScale }}
+      >
+        {/* Small intro */}
+        <motion.span
+          className="inline-block px-4 py-2 bg-yellow-400/10 border border-yellow-400/30 rounded-full text-yellow-400 text-sm font-semibold mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
         >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            <span className="inline-block px-4 py-2 bg-yellow-400/10 border border-yellow-400/30 rounded-full text-yellow-400 text-sm font-semibold mb-6">
-              Welcome to my portfolio
-            </span>
-          </motion.div>
-          
-          <motion.h1 
-            className="text-5xl md:text-7xl font-bold mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-          >
-            Hi, I&apos;m{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 to-yellow-400 animate-gradient">
-              Michael Ryan
-            </span>
-          </motion.h1>
-          
-          <div className="h-12 mb-8 overflow-hidden">
-            <AnimatePresence mode="wait">
-              <motion.p
-                key={titles[titleIndex]}
-                className="text-xl md:text-2xl text-gray-400"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5 }}
-              >
-                {titles[titleIndex]}
-              </motion.p>
-            </AnimatePresence>
-          </div>
-          
-          <motion.p
-            className="text-gray-300 mb-8 text-lg leading-relaxed"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-          >
-            Creating exceptional digital experiences with modern web technologies.
-            Passionate about clean code, beautiful interfaces, and solving complex problems.
-          </motion.p>
-          
-          <motion.div
-            className="flex flex-wrap gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-          >
-            <motion.a
-              href="#portfolio"
-              className="group relative px-8 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-semibold rounded-full overflow-hidden"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span className="relative z-10">View My Work</span>
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-orange-500 to-yellow-400"
-                initial={{ x: '100%' }}
-                whileHover={{ x: 0 }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.a>
-            
-            <motion.a
-              href="#contact"
-              className="group px-8 py-4 border-2 border-yellow-400 text-yellow-400 font-semibold rounded-full relative overflow-hidden"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span className="relative z-10">Get In Touch</span>
-              <motion.div
-                className="absolute inset-0 bg-yellow-400"
-                initial={{ y: '100%' }}
-                whileHover={{ y: 0 }}
-                transition={{ duration: 0.3 }}
-              />
-              <motion.span
-                className="absolute inset-0 flex items-center justify-center text-black font-semibold"
-                initial={{ y: '100%' }}
-                whileHover={{ y: 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                Get In Touch
-              </motion.span>
-            </motion.a>
-          </motion.div>
+          Welcome to my portfolio
+        </motion.span>
 
-          {/* Stats */}
-          <motion.div
-            className="flex gap-8 mt-12"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
+        {/* Massive name */}
+        <h1 className="font-black leading-[0.85] tracking-tighter">
+          <motion.span
+            className="block text-[14vw] md:text-[10vw] text-white"
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
           >
-            {[
-              { label: 'Tech Stack', value: '15+' },
-              { label: 'Production Sites', value: '2' },
-              { label: 'Satisfied Clients', value: '100%' }
-            ].map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 + (i * 0.1) }}
-              >
-                <div className="text-2xl font-bold text-yellow-400">{stat.value}</div>
-                <div className="text-xs text-gray-500 uppercase tracking-wider">{stat.label}</div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
-        
-        {/* Hero Image/Animation */}
+            MICHAEL
+          </motion.span>
+          <motion.span
+            className="block text-[14vw] md:text-[10vw] text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 to-yellow-400 animate-gradient"
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
+          >
+            RYAN
+          </motion.span>
+        </h1>
+
+        {/* Cycling subtitle */}
         <motion.div
-          className="relative hidden lg:block"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          className="h-10 mt-6 overflow-hidden"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8 }}
         >
-          <div className="relative w-full aspect-square max-w-lg mx-auto">
-            {/* Background Glow */}
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full blur-3xl opacity-20"
-              animate={{
-                scale: [1, 1.2, 1],
-                rotate: [0, 180, 360],
-              }}
-              transition={{
-                duration: 20,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-            />
-            
-            {/* Orbiting Elements */}
-            {[...Array(3)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute inset-0"
-                animate={{
-                  rotate: 360
-                }}
-                transition={{
-                  duration: 10 + (i * 5),
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
-              >
-                <div 
-                  className="absolute w-3 h-3 bg-yellow-400 rounded-full"
-                  style={{
-                    top: '10%',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    boxShadow: '0 0 15px rgba(255,211,0,0.8)'
-                  }}
-                />
-              </motion.div>
-            ))}
-            
-            {/* Center "Tech Hologram" Container */}
-            <div className="relative w-full h-full rounded-full  flex items-center justify-center">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={iconIndex}
-                  initial={{ opacity: 0, scale: 0.5, rotateY: 90 }}
-                  animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-                  exit={{ opacity: 0, scale: 0.5, rotateY: -90 }}
-                  transition={{ duration: 0.5 }}
-                  className="relative z-10"
-                >
-                  <CurrentIcon 
-                    size={200} 
-                    color={techIcons[iconIndex].color}
-                    className="drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]"
-                  />
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </div>
+          <CyclingTitle titles={titles} />
         </motion.div>
-      </div>
-      
+
+        {/* CTA buttons */}
+        <motion.div
+          className="flex flex-wrap justify-center gap-4 mt-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1, duration: 0.6 }}
+        >
+          <motion.a
+            href="#portfolio"
+            className="group relative px-8 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-semibold rounded-full overflow-hidden"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <span className="relative z-10">View My Work</span>
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-orange-500 to-yellow-400"
+              initial={{ x: '100%' }}
+              whileHover={{ x: 0 }}
+              transition={{ duration: 0.3 }}
+            />
+          </motion.a>
+
+          <motion.a
+            href="#contact"
+            className="px-8 py-4 border-2 border-yellow-400/50 text-yellow-400 font-semibold rounded-full hover:bg-yellow-400/10 transition-colors duration-300"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Get In Touch
+          </motion.a>
+        </motion.div>
+      </motion.div>
+
+      {/* Tech icon marquee strip */}
+      <motion.div
+        className="absolute bottom-0 left-0 w-full overflow-hidden py-5 border-t border-white/5"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2 }}
+      >
+        <motion.div
+          className="flex gap-16 items-center w-max"
+          animate={{ x: [0, -(marqueeIcons.length * 96)] }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+        >
+          {doubleIcons.map((icon, i) => (
+            <div key={i} className="flex items-center gap-3 shrink-0 opacity-20 hover:opacity-80 transition-opacity duration-300">
+              <icon.Component size={28} color={icon.color} />
+              <span className="text-xs text-gray-500 font-medium hidden md:block">{icon.label}</span>
+            </div>
+          ))}
+        </motion.div>
+      </motion.div>
+
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="absolute bottom-20 left-1/2 -translate-x-1/2"
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 1.5, repeat: Infinity }}
+        style={{ opacity: heroOpacity }}
       >
-        <div className="w-6 h-10 border-2 border-yellow-400 rounded-full flex justify-center">
+        <div className="w-6 h-10 border-2 border-yellow-400/40 rounded-full flex justify-center">
           <motion.div
-            className="w-1 h-3 bg-yellow-400 rounded-full mt-2"
+            className="w-1 h-3 bg-yellow-400/60 rounded-full mt-2"
             animate={{ y: [0, 12, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
           />
         </div>
       </motion.div>
     </section>
+  );
+};
+
+// Separate component for cycling titles to isolate re-renders
+import { useState, useEffect } from 'react';
+import { AnimatePresence } from 'framer-motion';
+
+const CyclingTitle = ({ titles }: { titles: string[] }) => {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % titles.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [titles.length]);
+
+  return (
+    <AnimatePresence mode="wait">
+      <motion.p
+        key={titles[index]}
+        className="text-xl md:text-2xl text-gray-400"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.4 }}
+      >
+        {titles[index]}
+      </motion.p>
+    </AnimatePresence>
   );
 };
 

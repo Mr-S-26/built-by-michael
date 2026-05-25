@@ -9,7 +9,7 @@ interface LoadingScreenProps {
   delayMs?: number;
 }
 
-const LoadingScreen = ({ onDone, delayMs = 2500 }: LoadingScreenProps) => {
+const LoadingScreen = ({ onDone, delayMs = 800 }: LoadingScreenProps) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

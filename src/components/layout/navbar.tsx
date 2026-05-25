@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { motion, useScroll } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 interface NavbarProps {
   showBrand?: boolean;
@@ -13,20 +14,53 @@ interface NavbarProps {
 const Navbar = ({ showBrand = true }: NavbarProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('#home');
   const { scrollYProgress } = useScroll();
-  
+  const pathname = usePathname();
+  const isHome = pathname === '/';
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (!isHome) {
+      setActiveSection('');
+      return;
+    }
+
+    const sectionIds = ['home', 'about', 'skills', 'portfolio', 'contact'];
+    const observers: IntersectionObserver[] = [];
+
+    sectionIds.forEach((id) => {
+      const element = document.getElementById(id);
+      if (!element) return;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setActiveSection(`#${id}`);
+          }
+        },
+        { rootMargin: '-40% 0px -40% 0px', threshold: 0 }
+      );
+
+      observer.observe(element);
+      observers.push(observer);
+    });
+
+    return () => observers.forEach((o) => o.disconnect());
+  }, [isHome]);
+
+  const prefix = isHome ? '' : '/';
   const links = [
-    { href: '#home', label: 'Home' },
-    { href: '#about', label: 'About' },
-    { href: '#skills', label: 'Skills' },
-    { href: '#portfolio', label: 'Portfolio' },
-    { href: '#contact', label: 'Contact' }
+    { href: `${prefix}#home`, label: 'Home' },
+    { href: `${prefix}#about`, label: 'About' },
+    { href: `${prefix}#skills`, label: 'Skills' },
+    { href: `${prefix}#portfolio`, label: 'Portfolio' },
+    { href: `${prefix}#contact`, label: 'Contact' }
   ];
 
   return (
@@ -36,11 +70,11 @@ const Navbar = ({ showBrand = true }: NavbarProps) => {
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-yellow-400 to-orange-500 z-[60] origin-left"
         style={{ scaleX: scrollYProgress }}
       />
-      
+
       <motion.header
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-          scrolled 
-            ? 'bg-black/80 backdrop-blur-xl border-b border-white/10 py-3' 
+          scrolled
+            ? 'bg-black/80 backdrop-blur-xl border-b border-white/10 py-3'
             : 'bg-transparent py-6'
         }`}
         initial={{ y: -100 }}
@@ -49,18 +83,18 @@ const Navbar = ({ showBrand = true }: NavbarProps) => {
       >
         <nav className="max-w-7xl mx-auto flex items-center justify-between px-6">
           {showBrand && (
-            <Link href="/" className="flex items-center gap-3 group">
-              <motion.div 
+            <Link href={isHome ? '/' : '/#home'} className="flex items-center gap-3 group">
+              <motion.div
                 layoutId="brand"
                 className="flex items-center gap-3"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <div className="w-10 h-10 rounded-full flex items-center justify-center shadow-lg group-hover:shadow-yellow-400/50 transition-shadow p-1.5">
-                  <Image 
-                    src="/logo.png" 
-                    alt="Michael Ryan Logo" 
-                    width={80} 
+                  <Image
+                    src="/logo.png"
+                    alt="Michael Ryan Logo"
+                    width={80}
                     height={80}
                     className="object-contain rounded-full"
                   />
@@ -71,40 +105,47 @@ const Navbar = ({ showBrand = true }: NavbarProps) => {
               </motion.div>
             </Link>
           )}
-          
+
           {/* Desktop Navigation */}
           <ul className="hidden md:flex items-center gap-8">
-            {links.map((link, i) => (
-              <motion.li
-                key={link.href}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-              >
-                <a
-                  href={link.href}
-                  className="relative text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-medium"
+            {links.map((link, i) => {
+              const linkHash = link.href.includes('#') ? `#${link.href.split('#')[1]}` : link.href;
+              const isActive = isHome && activeSection === linkHash;
+              return (
+                <motion.li
+                  key={link.href}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
                 >
-                  {link.label}
-                  <motion.span
-                    className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-orange-500"
-                    whileHover={{ width: '100%' }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </a>
-              </motion.li>
-            ))}
+                  <a
+                    href={link.href}
+                    className={`relative font-medium transition-colors duration-300 ${
+                      isActive ? 'text-yellow-400' : 'text-gray-300 hover:text-yellow-400'
+                    }`}
+                  >
+                    {link.label}
+                    <motion.span
+                      className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-yellow-400 to-orange-500"
+                      initial={false}
+                      animate={{ width: isActive ? '100%' : '0%' }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </a>
+                </motion.li>
+              );
+            })}
           </ul>
-          
+
           {/* Mobile menu button */}
-          <button 
+          <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="md:hidden text-yellow-400 p-2"
           >
-            <motion.svg 
-              className="w-6 h-6" 
-              fill="none" 
-              stroke="currentColor" 
+            <motion.svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
               viewBox="0 0 24 24"
               animate={{ rotate: mobileMenuOpen ? 90 : 0 }}
             >
@@ -121,24 +162,30 @@ const Navbar = ({ showBrand = true }: NavbarProps) => {
         <motion.div
           className="md:hidden bg-black/95 backdrop-blur-xl border-t border-white/10"
           initial={{ height: 0, opacity: 0 }}
-          animate={{ 
+          animate={{
             height: mobileMenuOpen ? 'auto' : 0,
             opacity: mobileMenuOpen ? 1 : 0
           }}
           transition={{ duration: 0.3 }}
         >
           <ul className="px-6 py-4 space-y-4">
-            {links.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-medium"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
+            {links.map((link) => {
+              const linkHash = link.href.includes('#') ? `#${link.href.split('#')[1]}` : link.href;
+              const isActive = isHome && activeSection === linkHash;
+              return (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`block font-medium transition-colors duration-300 ${
+                      isActive ? 'text-yellow-400' : 'text-gray-300 hover:text-yellow-400'
+                    }`}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </motion.div>
       </motion.header>
