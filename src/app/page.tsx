@@ -9,7 +9,6 @@ import LoadingScreen from '@/components/LoadingScreen';
 import ParallaxBackground from '@/components/ParallaxBackground';
 import Navbar from '@/components/layout/navbar';
 import HeroSection from '@/components/sections/hero';
-import AboutSection from '@/components/sections/about';
 import SkillsSection from '@/components/sections/skills';
 import PortfolioSection from '@/components/sections/portfolio';
 import ContactSection from '@/components/sections/contact';
@@ -91,9 +90,6 @@ const App = () => {
             <main ref={mainRef} className="relative z-10">
               {/* Hero Section */}
               <HeroSection />
-
-              {/* About Section */}
-              <AboutSection />
 
               {/* Skills Section */}
               <SkillsSection />

@@ -2,7 +2,18 @@
   "permissions": {
     "allow": [
       "Bash(npm run build:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git diff-tree:*)",
+      "Bash(xargs:*)",
+      "Bash(git push:*)",
+      "Bash(git reset:*)",
+      "Bash(while IFS= read -r f)",
+      "Bash(do git reset HEAD -- \"$f\")",
+      "Bash(done)",
+      "Bash(git commit:*)",
+      "Bash(git verify-pack:*)",
+      "Bash(git count-objects:*)",
+      "Bash(GIT_CURL_VERBOSE=1 git push:*)"
     ]
   }
 }

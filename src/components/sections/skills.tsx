@@ -5,7 +5,8 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import {
   SiReact, SiNextdotjs, SiTypescript, SiTailwindcss,
   SiNodedotjs, SiWordpress, SiMysql, SiPrisma,
-  SiSanity, SiFirebase, SiGit, SiFigma, SiRedux, SiExpo
+  SiSanity, SiFirebase, SiGit, SiFigma, SiRedux, SiExpo,
+  SiSupabase, SiPostgresql, SiVite, SiStripe, SiDeno
 } from 'react-icons/si';
 
 const skillCategories = [
@@ -13,11 +14,12 @@ const skillCategories = [
     title: 'Frontend',
     color: 'from-blue-400 to-cyan-400',
     skills: [
-      { name: 'React', icon: SiReact },
-      { name: 'React Native', icon: SiReact },
+      { name: 'React / React Native', icon: SiReact },
       { name: 'Next.js', icon: SiNextdotjs },
       { name: 'TypeScript', icon: SiTypescript },
-      { name: 'Tailwind CSS', icon: SiTailwindcss }
+      { name: 'Tailwind CSS', icon: SiTailwindcss },
+      { name: 'Vite', icon: SiVite },
+      { name: 'Framer Motion / GSAP', icon: null }
     ]
   },
   {
@@ -25,16 +27,17 @@ const skillCategories = [
     color: 'from-green-400 to-emerald-400',
     skills: [
       { name: 'Node.js', icon: SiNodedotjs },
+      { name: 'Supabase', icon: SiSupabase },
+      { name: 'Deno Edge Functions', icon: SiDeno },
       { name: 'REST APIs', icon: null },
-      { name: 'WordPress', icon: SiWordpress },
-      { name: 'WP Plugin Dev', icon: SiWordpress },
-      { name: 'Nodemailer', icon: null }
+      { name: 'WordPress / WooCommerce', icon: SiWordpress }
     ]
   },
   {
     title: 'Database & CMS',
     color: 'from-purple-400 to-pink-400',
     skills: [
+      { name: 'PostgreSQL', icon: SiPostgresql },
       { name: 'MySQL', icon: SiMysql },
       { name: 'Prisma ORM', icon: SiPrisma },
       { name: 'Sanity CMS', icon: SiSanity },
@@ -42,18 +45,19 @@ const skillCategories = [
     ]
   },
   {
-    title: 'Tools & Platforms',
+    title: 'Tools & Services',
     color: 'from-orange-400 to-red-400',
     skills: [
       { name: 'Git', icon: SiGit },
-      { name: 'Figma', icon: SiFigma },
+      { name: 'Stripe', icon: SiStripe },
       { name: 'Redux Toolkit', icon: SiRedux },
-      { name: 'Expo', icon: SiExpo }
+      { name: 'Expo', icon: SiExpo },
+      { name: 'Figma', icon: SiFigma }
     ]
   }
 ];
 
-const additionalSkills = ['GSAP', 'Framer Motion', 'NextAuth.js', 'WooCommerce', 'Leaflet', 'Vercel', 'Payment Gateways', 'Responsive Design'];
+const additionalSkills = ['Runway ML', 'Shotstack', 'ElevenLabs', 'NextAuth.js', 'Nodemailer', 'Leaflet', 'Recharts', 'Bootstrap', 'Vercel', 'PM2', 'Vitest / Jest', 'Responsive Design'];
 
 const SkillsSection = () => {
   const horizontalRef = useRef<HTMLElement>(null);
@@ -79,7 +83,7 @@ const SkillsSection = () => {
               </span>
             </h2>
             <p className="text-gray-400 mt-4 max-w-md text-lg">
-              A comprehensive toolkit built across 6+ production projects spanning web and mobile platforms.
+              A comprehensive toolkit built across 7 production projects spanning web and mobile platforms.
             </p>
           </div>
 
@@ -151,7 +155,7 @@ const SkillsSection = () => {
               </span>
             </h2>
             <p className="text-gray-400">
-              Built across 6+ production projects spanning web and mobile.
+              Built across 7 production projects spanning web and mobile.
             </p>
           </motion.div>
 

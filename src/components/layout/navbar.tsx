@@ -31,7 +31,7 @@ const Navbar = ({ showBrand = true }: NavbarProps) => {
       return;
     }
 
-    const sectionIds = ['home', 'about', 'skills', 'portfolio', 'contact'];
+    const sectionIds = ['home', 'skills', 'portfolio', 'contact'];
     const observers: IntersectionObserver[] = [];
 
     sectionIds.forEach((id) => {
@@ -57,7 +57,6 @@ const Navbar = ({ showBrand = true }: NavbarProps) => {
   const prefix = isHome ? '' : '/';
   const links = [
     { href: `${prefix}#home`, label: 'Home' },
-    { href: `${prefix}#about`, label: 'About' },
     { href: `${prefix}#skills`, label: 'Skills' },
     { href: `${prefix}#portfolio`, label: 'Portfolio' },
     { href: `${prefix}#contact`, label: 'Contact' }
@@ -100,7 +99,7 @@ const Navbar = ({ showBrand = true }: NavbarProps) => {
                   />
                 </div>
                 <span className="text-xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
-                  Michael Ryan
+                  BuiltByMichael
                 </span>
               </motion.div>
             </Link>

@@ -193,6 +193,16 @@ const PortfolioSection = () => {
       description: 'Membership management site for the American Credit Counselor Association. Features recurring billing, e-signatures, PDF generation, and an interactive US member map.',
       image: '/acca.png',
       tags: ['WordPress', 'WooCommerce', 'REST API', 'NMI Gateway'],
+    },
+    {
+      id: 7,
+      slug: 'property-motion',
+      title: 'Property Motion',
+      category: 'Full-Stack',
+      description: 'AI-powered SaaS that generates real estate marketing videos from property photos. Uses Runway ML, Anthropic Claude, ElevenLabs, and Shotstack for a full automated video pipeline.',
+      image: '/property-motion.png',
+      tags: ['React', 'Supabase', 'Runway ML', 'Shotstack', 'Stripe'],
+      featured: true
     }
   ];
 

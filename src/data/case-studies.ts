@@ -385,6 +385,70 @@ export const caseStudies: CaseStudy[] = [
       'Zero manual intervention needed for membership renewals',
     ],
   },
+  {
+    slug: 'property-motion',
+    title: 'Property Motion',
+    subtitle: 'AI-powered real estate video generation SaaS',
+    category: 'Full-Stack',
+    heroImage: '/property-motion.png',
+    overview:
+      'Property Motion is a SaaS platform that generates short-form real estate marketing videos from property photos. Users upload images, enter listing details, and the system produces polished 9:16 vertical videos with AI-generated motion, voiceover narration, property overlays, and background music — all stitched together automatically.',
+    problem:
+      'Real estate agents needed a fast way to create professional video content from property photos without hiring videographers or learning editing software. The solution had to handle the entire pipeline — from still images to a finished, branded video with voiceover and music — in minutes, not hours.',
+    solution:
+      'I built a React + Supabase platform with a multi-stage AI pipeline: Runway Gen-4 Turbo converts still photos into motion clips, Anthropic Claude writes marketing scripts, ElevenLabs generates voiceovers, and Shotstack stitches everything together with property overlays and agent branding. The frontend polls each stage and presents real-time progress to the user.',
+    techStack: [
+      { name: 'React 18' },
+      { name: 'TypeScript' },
+      { name: 'Vite' },
+      { name: 'Tailwind CSS' },
+      { name: 'Supabase' },
+      { name: 'Runway ML' },
+      { name: 'Shotstack' },
+      { name: 'ElevenLabs' },
+      { name: 'Anthropic Claude' },
+      { name: 'Stripe' },
+    ],
+    features: [
+      {
+        title: 'AI Video Generation Pipeline',
+        description:
+          'Multi-stage pipeline: Runway Gen-4 Turbo creates motion from stills, Shotstack composes the final video with overlays, transitions, and audio tracks.',
+      },
+      {
+        title: 'AI Script & Voiceover',
+        description:
+          'Anthropic Claude writes 15-second marketing scripts from property details, then ElevenLabs converts them to natural-sounding voiceovers with 6 voice options.',
+      },
+      {
+        title: 'Property Overlay System',
+        description:
+          '3 layout templates (Modern Luxe, Bold Banner, Minimal Focus) render property details, spec icons, and agent contact cards directly onto the video.',
+      },
+      {
+        title: 'Per-Image Camera Controls',
+        description:
+          'Users set camera angles (pan left/right, zoom in, wide shot) and duration (2-10s) per image for cinematic control over each clip.',
+      },
+      {
+        title: 'Property Listing Scraper',
+        description:
+          'ScraperAPI integration auto-fills property details and images from domain.com.au and realtor.com.au listing URLs.',
+      },
+      {
+        title: 'Stripe Subscription Billing',
+        description:
+          'Two pricing tiers (Starter $299/mo, Growth $499/mo) with Stripe checkout, webhook handling, and a self-service billing portal.',
+      },
+    ],
+    results: [
+      'End-to-end video generation from photos to finished MP4 in minutes',
+      'Multi-service AI pipeline orchestrating 4 external APIs',
+      'Real-time progress tracking across Runway and Shotstack stages',
+      'Curated music library with 15 tracks across 5 categories',
+      'Agent branding system with photo, contact details, and circular mask overlay',
+    ],
+  },
 ];
 
 export function getCaseStudy(slug: string): CaseStudy | undefined {
