@@ -449,6 +449,67 @@ export const caseStudies: CaseStudy[] = [
       'Agent branding system with photo, contact details, and circular mask overlay',
     ],
   },
+  {
+    slug: 'feud-frenzy',
+    title: 'Feud Frenzy',
+    subtitle: 'Offline Family Feud game show app for live events',
+    category: 'Desktop',
+    heroImage: '/feud-frenzy.png',
+    overview:
+      'Feud Frenzy is a Family-Feud-inspired live game show application built with Electron for conferences and events. It runs 100% offline on a single laptop with dual screens — a Controller window for the operator and an Audience window for the projector — delivering a polished, broadcast-quality game experience.',
+    problem:
+      'Event organizers needed a reliable, offline Family Feud game for live conferences and corporate events. Existing solutions required internet connectivity, lacked dual-screen support, and offered limited customization. The app had to run flawlessly during live events with no room for lag, crashes, or network dependency.',
+    solution:
+      'I built a dual-window Electron app with React and TypeScript. The Controller window gives the operator full game control via IPC commands, while the Audience window displays the game board on a projector. A centralized GameStateManager uses a reducer pattern to manage all game logic, broadcasting state updates to both windows simultaneously. The app includes a question library system with Zod validation, USB buzzer integration for face-off rounds, and a custom audio protocol for sound effects.',
+    techStack: [
+      { name: 'Electron 28' },
+      { name: 'React 18' },
+      { name: 'TypeScript' },
+      { name: 'Tailwind CSS' },
+      { name: 'Vite' },
+      { name: 'Zod' },
+      { name: 'electron-builder' },
+    ],
+    features: [
+      {
+        title: 'Dual-Window Architecture',
+        description:
+          'Controller window (1200x800) for the operator and a fullscreen Audience window for the projector, communicating via Electron IPC with real-time state synchronization.',
+      },
+      {
+        title: 'Question Library System',
+        description:
+          'Persistent JSON-based library for managing question sets with CRUD operations, usage tracking, JSON import, and Zod schema validation.',
+      },
+      {
+        title: 'USB Buzzer Face-Off',
+        description:
+          'Keyboard-mapped buzzer system supporting USB buzzers with face-off, challenge, and playing phases — including lockout timers and team-specific key mapping.',
+      },
+      {
+        title: 'Advanced Scoring Engine',
+        description:
+          'Per-team round points, Round 3 double points, 300-point instant win, steal mode with success/fail outcomes, and automatic tiebreaker detection.',
+      },
+      {
+        title: 'Answer Unreveal System',
+        description:
+          'Operators can undo revealed answers, with points automatically subtracted from the correct team — each answer tracks which team revealed it.',
+      },
+      {
+        title: 'Custom Audio System',
+        description:
+          'Custom audio:// protocol for sound effects (correct, wrong, buzz, voice-over) with volume control, mute toggle, and IPC-broadcast playback across both windows.',
+      },
+    ],
+    results: [
+      'Production-ready desktop app deployed at live events',
+      'Dual-window system with real-time IPC state synchronization',
+      'Question library with persistent storage and Zod validation',
+      'USB buzzer integration with multi-phase face-off mechanics',
+      'Packaged as a one-click Windows NSIS installer',
+    ],
+  },
 ];
 
 export function getCaseStudy(slug: string): CaseStudy | undefined {

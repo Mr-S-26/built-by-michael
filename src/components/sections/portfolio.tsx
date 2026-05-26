@@ -131,7 +131,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
 const PortfolioSection = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
 
-  const categories = ['All', 'Full-Stack', 'Frontend', 'Mobile'];
+  const categories = ['All', 'Full-Stack', 'Frontend', 'Mobile', 'Desktop'];
 
   const projects: Project[] = [
     {
@@ -202,6 +202,16 @@ const PortfolioSection = () => {
       description: 'AI-powered SaaS that generates real estate marketing videos from property photos. Uses Runway ML, Anthropic Claude, ElevenLabs, and Shotstack for a full automated video pipeline.',
       image: '/property-motion.png',
       tags: ['React', 'Supabase', 'Runway ML', 'Shotstack', 'Stripe'],
+      featured: true
+    },
+    {
+      id: 8,
+      slug: 'feud-frenzy',
+      title: 'Feud Frenzy',
+      category: 'Desktop',
+      description: 'Offline Family Feud game show app for live events. Dual-window Electron app with operator controls, projector display, USB buzzer face-off, question library, and custom audio system.',
+      image: '/feud-frenzy.png',
+      tags: ['Electron', 'React', 'TypeScript', 'Vite', 'Zod'],
       featured: true
     }
   ];

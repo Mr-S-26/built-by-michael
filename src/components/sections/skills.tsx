@@ -6,7 +6,8 @@ import {
   SiReact, SiNextdotjs, SiTypescript, SiTailwindcss,
   SiNodedotjs, SiWordpress, SiMysql, SiPrisma,
   SiSanity, SiFirebase, SiGit, SiFigma, SiRedux, SiExpo,
-  SiSupabase, SiPostgresql, SiVite, SiStripe, SiDeno
+  SiSupabase, SiPostgresql, SiVite, SiStripe, SiDeno,
+  SiElectron, SiZod
 } from 'react-icons/si';
 
 const skillCategories = [
@@ -19,7 +20,8 @@ const skillCategories = [
       { name: 'TypeScript', icon: SiTypescript },
       { name: 'Tailwind CSS', icon: SiTailwindcss },
       { name: 'Vite', icon: SiVite },
-      { name: 'Framer Motion / GSAP', icon: null }
+      { name: 'Framer Motion / GSAP', icon: null },
+      { name: 'Electron', icon: SiElectron }
     ]
   },
   {
@@ -57,7 +59,7 @@ const skillCategories = [
   }
 ];
 
-const additionalSkills = ['Runway ML', 'Shotstack', 'ElevenLabs', 'NextAuth.js', 'Nodemailer', 'Leaflet', 'Recharts', 'Bootstrap', 'Vercel', 'PM2', 'Vitest / Jest', 'Responsive Design'];
+const additionalSkills = ['Zod', 'Runway ML', 'Shotstack', 'ElevenLabs', 'NextAuth.js', 'Nodemailer', 'Leaflet', 'Recharts', 'Bootstrap', 'Vercel', 'PM2', 'Vitest / Jest', 'electron-builder', 'Responsive Design'];
 
 const SkillsSection = () => {
   const horizontalRef = useRef<HTMLElement>(null);
@@ -83,7 +85,7 @@ const SkillsSection = () => {
               </span>
             </h2>
             <p className="text-gray-400 mt-4 max-w-md text-lg">
-              A comprehensive toolkit built across 7 production projects spanning web and mobile platforms.
+              A comprehensive toolkit built across 8 production projects spanning web and mobile platforms.
             </p>
           </div>
 
@@ -155,7 +157,7 @@ const SkillsSection = () => {
               </span>
             </h2>
             <p className="text-gray-400">
-              Built across 7 production projects spanning web and mobile.
+              Built across 8 production projects spanning web and mobile.
             </p>
           </motion.div>
 
